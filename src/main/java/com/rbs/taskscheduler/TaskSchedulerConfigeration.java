@@ -20,16 +20,16 @@ public class TaskSchedulerConfigeration {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	
 	
-	//@Scheduled(fixedDelay = 2000, cron = "0 0 18 * * MON-FRI")//every (* * * * * *) sec min hr d w m 
+	//@Scheduled(fixedDelay = 2000, cron = "0 0 18 * * MON-FRI")//every (* * * * * *) sec min hr d w m //"${cron.expression}"
 	@Scheduled(initialDelay = 1000, fixedDelayString =  "${somejob.delay}")//"PT2H" / "${somejob.delay}"
 	public void scheduleFixedDelayTask() throws InterruptedException {
-		log.info("First task - " + System.currentTimeMillis() / 1000);
+		log.info("fixedDelayString task - " + System.currentTimeMillis() / 1000+ " ThreadName: "+Thread.currentThread().getName());
 	    Thread.sleep(1000L);
 	}
 	
 	@Scheduled(fixedRate = 10000)
 	public void performTask() {
-		log.info("Regular task performed at " + dateFormat.format(new Date()));
+		log.info("fixedRate task performed at " + dateFormat.format(new Date()));
 
 	}
 	
